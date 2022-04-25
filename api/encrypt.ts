@@ -12,14 +12,14 @@ async function decryptText(encryptedText: string) {
   return decryptedText;
 }
 
-export default function handler(
+export default async function handler(
   request: NextApiRequest,
   response: NextApiResponse
 ) {
-  const { message } = request.body;
-  const encryptedText = encryptText(message);
-
+  const { message } = request?.body;
+  const encryptedText = await encryptText(message);
   response.status(200).json({
     encryptedText,
+    message,
   });
 }
